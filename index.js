@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config()
+require('dotenv').config();
+const jwt = require('jsonwebtoken')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const port = process.env.PORT || 5000;
 const app = express();
@@ -108,6 +109,14 @@ async function run() {
       const result = await membersCollection.insertOne(user)
       console.log(result)
       res.send(result)
+    })
+
+    // Autantication api
+
+    app.post('/jwt',async(req,res)=>{
+       const user = req.body;
+       console.log(user);
+       res.send(user)
     })
 
 
